@@ -4,10 +4,10 @@
 
 void setup() {
   // put your setup code here, to run once:
-  pinMode( 3 , OUTPUT);
+  pinMode(3 , OUTPUT);
 
-  Serial.begin(9600); 
-  
+  Serial.begin(9600);
+
   int x = 1000000 / FREQUENCY / 2;
   int pulse_count = TIME * FREQUENCY;
   int timer = millis();
@@ -16,15 +16,18 @@ void setup() {
     digitalWrite(3, HIGH);
     delayMicroseconds(x);
     digitalWrite(3, LOW);
-    delayMicroseconds(x);  
+    delayMicroseconds(x);
     }
-  
+
   timer = millis() - timer;
-  Serial.println(timer);
-  Serial.println((pulse_count / (timer / 1000)));
+  Serial.print("Time [s]: ");
+  Serial.println(timer / 1000);
+  Serial.print("Num pulses: ");
   Serial.println(pulse_count);
+  Serial.print("Average frequency [Hz]: ");
+  Serial.println((pulse_count / (timer / 1000)));
 }
-  
+
 void loop() {
-  // put your main code here, to run repeatedly:  
+  // put your main code here, to run repeatedly:
 }
