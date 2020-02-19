@@ -1,13 +1,18 @@
 #include <Arduino.h>
-#define FREQUENCY 1000
-#define TIME 3
+#define FREQUENCY 200
+#define TIME 15
 #define PIN 3
 
 void send_pulses() {
   int x = 1000000 / FREQUENCY / 2;
   int pulse_count = TIME * FREQUENCY;
-  int timer = millis();
 
+  Serial.print("Expected duration [s]: ");
+  Serial.println(TIME);
+  Serial.print("Expected number of pulses: ");
+  Serial.println(pulse_count);
+
+  int timer = millis();
   for (int i = 0; i < pulse_count; i++) {
     digitalWrite(PIN, LOW);
     delayMicroseconds(x);
@@ -17,12 +22,10 @@ void send_pulses() {
   digitalWrite(PIN, LOW);
 
   timer = millis() - timer;
-  Serial.print("Time [s]: ");
-  Serial.println(timer / 1000);
-  Serial.print("Num pulses: ");
-  Serial.println(pulse_count);
+  Serial.print("Actual duration [s]: ");
+  Serial.println(timer / 1000.0);
   Serial.print("Average frequency [Hz]: ");
-  Serial.println((pulse_count / (timer / 1000)));
+  Serial.println(pulse_count / (timer / 1000.0));
 }
 
 
